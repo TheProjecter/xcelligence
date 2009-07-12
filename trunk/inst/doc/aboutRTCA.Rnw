@@ -1,0 +1,35 @@
+%\VignetteIndexEntry{aboutRTCA: Introduction to Roche(R) Xcelligence RTCA system}
+%\VignetteDepends{}
+%\VignettePackage{RTCA}
+
+\documentclass[11pt]{article}
+
+\usepackage{times}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage[pdftex]{graphicx}
+\SweaveOpts{keep.source=TRUE,eps=FALSE,pdf=TRUE,prefix=TRUE} 
+
+% R part
+\newcommand{\R}[1]{{\textsf{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+\newcommand{\Metas}[1]{{\texttt{#1}}}
+
+\begin{document}
+\setkeys{Gin}{width=0.8\textwidth}
+\title{About Roche(R) Xcelligence RTCA System}
+\author{Jitao David Zhang, Ulrich Tschulena and Stefan Wiemann}
+
+\maketitle
+
+ The Xcelligence Real-Time Cell Analyzer (abbreviated as RTCA throughout the package if not otherwise stated) is a cell-based assay system integrating micro electronics and cell biology, suitable for uninterrupted monitoring of processes in living cells and for monitoring real-time kinetics. 
+
+Each system contains a micro-electronic biosensor built into each well of the 6 standard 96-well E plate microtitle plates. A cell that has contact with the sensor changes the electrical impedance between the microelectrodes. Changes in the cell's status, for instance cell adhesion/invasion, cytotoxity, proliferation and morphological changes, lead to changes in the impedance measuresments and can therefore be quickly detected in real-time.
+
+The Xcelligence system was invented by ACEA Biosciences and was co-developed by Roche and ACEA. 
+
+\end{document}
