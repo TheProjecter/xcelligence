@@ -1,0 +1,14 @@
+Package: RTCA
+Type: Package
+Title: Toolkit to analyse data from Xcelligence RTCA MP Intrsument by Roche
+Version: 1.0.11
+Date: 2009-07-12
+Author: Jitao David Zhang, Ulrich Tschulena and Stefan Wiemann
+Maintainer: Jitao David Zhang <j.zhang@dkfz.de>
+Description: Import, analyze and visualize data harvested from Roche(R) Xcelligence RTCA systems. It introduces the densely concentrated stream of information produced by RTCA systems into computational and statistical environment R/Bioconductor, and combines the power of versatile analytic and modelling tools implemented in R with the edge-cutting sensitivity and reproducibility brought by the system. 
+License: LGPL-3
+LazyLoad: yes
+Depends: methods, stats,Biobase, RColorBrewer
+Collate: AllClasses.R AllGenerics.R AllMethods.R RTCAfunctions.R
+URL: http://www.roche.de/, http://www.dkfz.de/en/mga/index.html
+biocViews: CellBasedAssays, Infrastructure, Visualization, 
