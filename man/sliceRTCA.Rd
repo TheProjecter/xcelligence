@@ -1,14 +1,14 @@
-\name{spliceRTCA}
+\name{sliceRTCA}
 \Rdversion{1.1}
-\alias{spliceRTCA}
+\alias{sliceRTCA}
 \title{
-  SPLICE RTCA OBJECT WITH TIME
+  SLICE RTCA OBJECT WITH TIME
 }
 \description{
-  Subset (splice) RTCA object with starting- and ending-time
+  Subset (slice) RTCA object with starting- and ending-time
 }
 \usage{
-spliceRTCA(x, start, end)
+sliceRTCA(x, start, end)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,5 +32,5 @@ spliceRTCA(x, start, end)
   ofile <- system.file("/extdata/testOutput.csv", package="RTCA")
   x <- parseRTCA(ofile)
 
-  subx <- spliceRTCA(x, 20, 50)
+  subx <- sliceRTCA(x, 20, 50)
 }
