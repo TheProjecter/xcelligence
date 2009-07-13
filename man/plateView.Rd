@@ -25,7 +25,7 @@ plateView(rtca, ylim, ...)
   Jitao David Zhang \email{j.zhang@dkfz.de}
 }
 \seealso{
-  \code{\link{plotRTCA}}
+  \code{\linkS4class{RTCA}}
 }
 \examples{
 require(RTCA)

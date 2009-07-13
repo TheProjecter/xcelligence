@@ -24,4 +24,4 @@ setGeneric("timepoints", function(object) standardGeneric("timepoints"))
 setGeneric("timepoints<-", function(object,value) standardGeneric("timepoints<-"))
 
 ## plot
-setGeneric("plotRTCA", function(x,y,...) standardGeneric("plotRTCA"))
+
