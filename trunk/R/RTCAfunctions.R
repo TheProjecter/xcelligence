@@ -315,10 +315,9 @@ plotGridEffect <- function(rtca, mode=c("column","row"), xlab="time point", ylab
   for(i in 1:ncol(mean)) {
     lines(1:nrow(mean), mean[,i], col=cols[i], lwd=4)
   }
-#  browser()
   if(legend) {
     legend("topright",
-           legend=1:ncol(mean), lty=1, lwd=4, col=cols, ncol=4, bty="n")
+           legend=1:ncol(mean), lty=1, lwd=4, col=cols, ncol=4, bty="n", title=mode)
   }
 }
 

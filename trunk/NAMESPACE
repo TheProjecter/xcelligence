@@ -1,4 +1,5 @@
 import("Biobase")
 importFrom("stats","time")
+importFrom("graphics","plot")
 
 exportPattern("^[[:alpha:]]+")

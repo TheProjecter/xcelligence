@@ -186,12 +186,15 @@ setMethod("time", "RTCA", function(x,...) {
 ##--------------------##
 ## plot methods
 ##--------------------##
-setMethod("plotRTCA", "RTCA", function(x,y,...) {
- times <- timepoints(x)
- mat <- exprs(x)[,y,drop=FALSE]
- matplot(times, mat,...)
+setMethod("plot", c("RTCA"), function(x,y,...) {
+  times <- timepoints(x)
+  if(missing(y)) {
+    y <- seq(from=1, to=ncol(x))
+  }
+  
+  mat <- exprs(x)[,y,drop=FALSE]
+  matplot(times, mat, ...)
 })
-
 
 ##----------------------------------------##
 ## transformation

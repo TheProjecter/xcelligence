@@ -29,6 +29,7 @@
 \alias{timepoints<-}
 \alias{timepoints<-,RTCA-method}
 \alias{updateAction,RTCA,numeric,character-method}
+\alias{plot,RTCA-method}
 
 \title{Class "RTCA"}
 \description{RTCA object}
@@ -87,7 +88,11 @@ Class \code{\link[Biobase]{Versioned-class}}, by class "ExpressionSet", distance
       recording time points }
     \item{updateAction}{\code{signature(object = "RTCA", time =
 	"numeric", action = "character")}: update the action at the specified time, passed
-    to the \code{RTCAtimeline} slot }
+      to the \code{RTCAtimeline} slot }
+    \item{plot}{\code{signature(x = "RTCA", y)}: plot the RTCA running
+      plot with \code{\link{matplot}}. \code{y} is interpretated as the
+      indices of the columns to be plotted, and will be expanded to all
+      the columns in case it is missing.}
   }
 }
 \references{

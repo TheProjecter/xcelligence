@@ -13,3 +13,11 @@
 	* RTCA-class: Experiment ID added to RTCA class
 
 	* Makefile: add Makefile to simplify common tasks like check and install
+
+	* plotGridEffect: takes 'column' instead of 'col' as mode
+	parameter, and renders the mode as the title of the
+	legend. Documentation updated.
+
+	* plotRTCA: is removed from the package and is substituted by the
+	plot function.
+	
