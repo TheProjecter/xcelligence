@@ -1,8 +1,15 @@
-%\VignetteIndexEntry{aboutRTCA: Introduction to Roche(R) Xcelligence RTCA system}
+%\VignetteIndexEntry{Introduction to Data Analysis of the Roche xCELLigence System with RTCA Package}
 %\VignetteDepends{}
 %\VignettePackage{RTCA}
 
 \documentclass[11pt]{article}
+
+\usepackage{mathptmx}	 
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{multirow}
+\usepackage{url}
+\renewcommand{\multirowsetup}{\centering}
 
 \usepackage{times}
 \usepackage{hyperref}
@@ -12,6 +19,8 @@
 \SweaveOpts{keep.source=TRUE,eps=FALSE,pdf=TRUE,prefix=TRUE} 
 
 % R part
+\newcommand{\todo}[2]{\textit{\textbf{To do:} (#1) #2}}
+\newcommand{\fixme}[2]{\textit{\textbf{FIXME:} (#1) #2}}
 \newcommand{\R}[1]{{\textsf{#1}}}
 \newcommand{\Rfunction}[1]{{\texttt{#1}}}
 \newcommand{\Robject}[1]{{\texttt{#1}}}
@@ -19,17 +28,190 @@
 \newcommand{\Rclass}[1]{{\textit{#1}}}
 \newcommand{\Metas}[1]{{\texttt{#1}}}
 
+% trademark, copyright and registered
+\def\TReg{\textsuperscript{\textregistered}}
+\def\TCop{\textsuperscript{\textcopyright}}
+\def\TTra{\textsuperscript{\texttrademark}}
+\def\xSys{xCELLigence\TTra System}
+
 \begin{document}
 \setkeys{Gin}{width=0.8\textwidth}
-\title{About Roche(R) Xcelligence RTCA System}
-\author{Jitao David Zhang, Ulrich Tschulena and Stefan Wiemann}
+\title{Introduction to the Data Analysis of the Roche xCELLigence\TTra  System with \Rpackage{RTCA} Package}
+\author{Jitao David Zhang}
 
 \maketitle
 
- The Xcelligence Real-Time Cell Analyzer (abbreviated as RTCA throughout the package if not otherwise stated) is a cell-based assay system integrating micro electronics and cell biology, suitable for uninterrupted monitoring of processes in living cells and for monitoring real-time kinetics. 
+\section{Introduction to the xCELLigence\TTra System}
+The xCELLigence\TTra System, which contains a series of \underline{R}eal--\underline{T}ime \underline{C}ell \underline{A}nalyzer (RTCA), is a labeling--free cell--based assay system integrating micro electronics and cell biology, suitable for uninterrupted monitoring of biolgical processes of living cells.
 
-Each system contains a micro-electronic biosensor built into each well of the 6 standard 96-well E plate microtitle plates. A cell that has contact with the sensor changes the electrical impedance between the microelectrodes. Changes in the cell's status, for instance cell adhesion/invasion, cytotoxity, proliferation and morphological changes, lead to changes in the impedance measuresments and can therefore be quickly detected in real-time.
+The system relies on a micro-electronic biosensor built into each each of the 6 standard 96-well \emph{E-plate\TTra} microtitle plates. The sensor measures the electrical impedance of the cell population in the well. Cells that have contact with the sensor change the electrical impedance between the microelectrodes. The impedance measurement provides quantitative read-time information about the status of the cells, including cell number, viability and morphology. 
 
-The Xcelligence system was invented by ACEA Biosciences and was co-developed by Roche and ACEA. 
+The Xcelligence system was invented by ACEA Biosciences and was co-developed by Roche and ACEA. Further information about the device and application notes are provided at \url{http://www.xcelligence.roche.com}.
+
+\subsection{Technology}
+In principle, assay with the \xSys begins similar as other cell-based assays. However, instead of usual 96--well plates, cells are seeded in special plates (\emph{E-plate\TTra} with micro electrodes covering well bottoms. The more cells attached on the electrodes, the larger the increases in electrode impedance. However, the cell number is not the factor determining the impedance. Other factors, like cell interaction strength with the electrodes and cell morphology, will also affect the impedance measurement. Therefore, electrode impedance, which is displayed and recorded as \emph{\underline{C}ell \underline{I}ndex} (CI) values, reflect the biolgical statue of monitored cells, including the cell number, cell viability, morphology and adhesion degree.
+
+The main read-out of the \xSys, \emph{Cell Index} (CI), is a dimensionless parameter. It is derived as a relative change in measured electrical impedance to represent cell status. It follows following rules:
+\begin{itemize}
+\item When cells are not present or not adhereed on the electrodes, the CI is zero
+\item Under the same physiological conditions, the more cells are attached on the electrodes, the CI values are larger. That is, CI is marginally a monotonical function of cell number
+\item Additionally, change in cell status, such as cell morphology, cell adhesion or cell viability, will lead to a change in CI.
+\end{itemize}
+
+\section{Basic features of the \Rpackage{RTCA} package}
+The open-source \Rpackage{RTCA} package is developed in the framework of \R{Bioconductor} with programming language \R{R}. As an alternative to the commercial software \emph{RTCA} (current version 1.2, stand 07/2009), the \Rpackage{RTCA} package in R mainly provides following functionalities:
+\begin{itemize}
+\item Command-line operation of RTCA data in the environment of R.
+\item Alternatives of transformation methods besides the default strategy \emph{ratioTransform} used by the commercial software, which is also included in the package.
+\item Various visualization possibilities of the data from \xSys. Users could also develop other visualization tools with the data structure provided by the package based on their need.
+\item The analysis procedure can be further combined with other tools in the framework of \R{Bioconductor}, like \Rpackage{KEGGgraph} package for pathway graph analysis or \Rpackage{RpsiXML} for interaction analysis. Annotation packages could be also very useful to annotate the experiment results.
+\end{itemize}
+
+We draw the outline of basic use of the \Rpackage{RTCA} by a probe experiment performed by Dr. Ulrich Tschulena \textit{et al.} from the Division of Molecular Genome Analysis, DKFZ. They used the \xSys to examine the effect of gene knockdown in human HeLa cells with siRNA transfection. The experiments were replicated with three biological replicates. For the sake of simplicity we use the data from one \emph{E-plate} to illustrate the pipeline of analysis with \Rpackage{RTCA}.
+
+First of all we load the \Rpackage{RTCA} package
+<<loadLib, echo=TRUE, results=hide>>=
+library(RTCA)
+@ 
+\subsection{Data import}
+The first step is to import the data from the RTCA device. In the software provided with the device, user can find the option to export tab-delimited files. Please check the help page of \Rfunction{parseRTCA} for a brief description of the file format. Once the data is exported, the import can be as simple as following two commands:
+<<dataImport, echo=TRUE>>=
+ofile <-  system.file("extdata/testOutput.csv", package="RTCA")
+x <- parseRTCA(ofile)
+@ 
+
+The variable \Robject{ofile} refers to an exported tab-delimited file. Here we use the one provided with the package by calling \Robject{system.file} function. If the file is saved in other directory, one could modify the reference to the file by using the \Robject{file.path} command, like
+<<dataImportFile, echo=TRUE, eval=FALSE>>=
+ofile <- file.path("/directory/of/the/file/myFile.txt")
+@ 
+
+\Robject{parseRTCA} parses the file into a S4--class object \Robject{RTCA}. We can print the object to get an impression of how is the object constructed.
+<<printRTCA, echo=TRUE>>=
+x
+@ 
+
+The \Robject{x}, as an \Robject{RTCA} object, contains following information
+\begin{enumerate}
+\item Experiment ID, which can be later associated with meta-information of the experiment,
+\item RTCA time line, containing the time track of actions performed during the assay,
+\item ExpressionSet, the data structure containing core data of the RTCA experiment.
+\end{enumerate}
+
+\subsubsection{Annotation}
+Quite often we would like to annotate the wells of the \emph{E-plate}, for example the siRNA number and targeting gene in our case. We have provided the annotation information of the experiment in a \emph{csv} file. We build the annotation (which we call \emph{phenoData} as an convention from the \R{Bioconductor} community) of the plate in the following steps.
+<<annotate, echo=TRUE>>=
+pfile <- system.file("extdata/testOutputPhenoData.csv", package="RTCA")
+pData <- read.csv(pfile, sep="\t", row.names="Well")
+metaData <- data.frame(labelDescription=c(
+                         "Rack number",
+                         "siRNA catalogue number",
+                         "siRNA gene symbol",
+                         "siRNA EntrezGene ID",
+                         "siRNA targeting accession"
+                         ))
+phData <- new("AnnotatedDataFrame", data=pData, varMetadata=metaData)
+@
+
+The \Robject{phData}, our \emph{phenoData}, contains the annotation information of the plate. We can assign it to the \Robject{phenoData} slot of the \Robject{RTCA} object by
+<<annotateAssign, echo=TRUE>>=
+phenoData(x) <- phData
+@ 
+which annotates the object \Robject{x}
+<<annotatedx, echo=TRUE>>=
+head(pData(x))
+@ 
+
+The procedure of annotation, alternatively, can be also accomplished together with the parsing, namely by the following codes (note that the \Robject{phData} object has been created)
+<<alternativeAnnotate, echo=TRUE, eval=FALSE>>=
+x <- parseRTCA(ofile, phenoData=phData)
+@ 
+
+See the help page of \Rfunction{parseRTCA} for more information on the use of the function.
+
+It maybe useful to examine the imported data visually, with \Rfunction{plot} function. Figure \ref{fig:plotRTCA} visualizes the cell index readouts of the wells 1--4.
+
+\begin{figure}
+\begin{center}
+<<plotRTCA, echo=TRUE, fig=TRUE>>=
+  plot(x[,1:4], type="l", col="black", lty=1:4, xlab="time point", ylab="Cell Index")
+@ 
+\caption{Plot RTCA data of the well 1 to 4. Note that the subset of the \Robject{RTCA} object is supported natively like that of \Robject{data.frame}.}\label{fig:plotRTCA}
+\end{center}
+\end{figure}
+
+\subsection{Edit time line}
+One can edit the time line of the \Robject{RTCA} assay according to the experiment procedure. The feature allows to append the protocol to the data and simplifies the following manipulations. Suppose that in our case two main steps have been performed during the assay:
+\begin{enumerate}
+\item siRNA transfection at the 22th hour, and 
+\item cell culture medium change at the 30th hour.
+\end{enumerate}
+
+We could edit the time line in the following way
+<<addTimeLine, echo=TRUE>>=
+x <- addAction(x, 22, "trasfection")
+x <- addAction(x, 30, "medium change")
+@ 
+
+We could use \Rfunction{show(x)} to print the whole \Robject{RTCA} object to see the effect of editing time line, or we could extract the time line in the following way:
+<<extractTimeLine, echo=TRUE>>=
+timeline(x)
+@ 
+
+Note that corresponding changes have been made. The time line slot of \Robject{RTCA} supports CRUD (create, read, update and delete) manipulations. The following toy examples shows the basic use of these functions. For more information we refer the readers to help pages.
+<<timeLineExamples, echo=TRUE>>=
+tl <- timeline(x)
+show(tl)
+tlAdd <- addAction(tl, 35, "normalization"); tlAdd
+getAction(tl, 22)
+tlComp <- updateAction(tl, 22, "compound transfection")
+tlComp
+tlRm <- rmAction(tlAdd,35 ); tlRm
+@ 
+
+\subsection{Transformation}
+The software provided with the device takes the strategy which we call \emph{ratio transformation}, which divides cell index (CI) readouts of all wells at all time points over the CI value of individual wells at a same time point, which is known as the \emph{base-time}. The transformation scales the CI values in different wells at the base-time uniformly as 1, making the transformed (normalized) cell index more comparable between the wells. This function is implemented in the \Rpackage{RTCA} package as the function \Rfunction{ratioTransform}, which takes a \Robject{RTCA} object and the \emph{base-time} as parameter. The resulted \emph{normalized cell index} is actually the relative cell impedance presented in the percentage of the value at the base-time.
+
+Figure \ref{fig:ratioTransform} shows the effect of such a transformation.
+
+\begin{figure}
+\begin{center}
+<<ratioTransform, echo=TRUE,fig=TRUE>>=
+xRatio <- ratioTransform(x, 35)
+plot(xRatio[,1:4], lty=1:4, type="l", col="black",xlab="time point", ylab="Normalized Cell Index")
+abline(v=35, col="red", lwd=2)
+@ 
+\end{center}
+\caption{Plot ratio transformed RTCA data of the well 1 to 4, with the base-time indicated by the red vertical solid line. Note the normalized cell index at the base-time is set to 1 in all wells}\label{fig:ratioTransform}
+\end{figure}
+
+The ratio transformation scales the cell index in different wells and makes them comparable, which is desired in many situations. However, we believe that this transformation also bring in problems:
+\begin{itemize}
+\item Since the \emph{base-time} is often arbitrarilly set (in our case it is set as 5 hours later than the medium change), its selection may affect the curve of normalized cell index dramatically. In our special case, if we assume that the cell populations are similar before siRNA transfection and set the base-time right before the step, the normalized values of the time points after the transfection will incoorperate the effects caused by siRNA transfection and medium change, which do not interest us very much. When we set the base-time short after the medium change, the shift of the base-time would lead to very different shapes of the curve.
+\item Another concern is the variance distortion caused by the ratio transformation. It is observed easily that the variance of transformed values are very small around the base-time and get significantly larger as the time increases. This raises concerns when similar variance is expected, for instance in the situation of many canonical statistical tests. 
+\end{itemize}
+
+Therefore we also search for other transformation possibilities, including \emph{derivative transformation} and \emph{relative growth rate transformation},  which are discussed in the other vignette of the package.
+
+\subsection{Visualization}
+Besides the \Rfunction{plot} function we have seen before, \Rpackage{RTCA} provides also other possibilities to visualize the data. For example, the \Rfunction{plateView} depicts the RTCA result of one \emph{E-plate} in one figure, so that user could get an impression of the assay with a single glance, like in Figure \ref{fig:plateView}
+\begin{figure}
+\begin{center}
+<<plateView, echo=TRUE, fig=TRUE>>=
+plateView(x, col="orange")
+@ 
+\caption{Plate view of a 96--well \emph{E-plate} from a RTCA assay run.}\label{fig:plateView}
+\end{center}
+\end{figure}
+
+In addition the package also provide function \Rfunction{controlView} for the visualization of a few samples. Please check the help page for the use of the function.
+
+\section{What to do next?}
+Users familiar with the basic data structures and operations are advised to explore more functionalities documented in the vignette \emph{RTCAtransformation}.
+
+\section{Session Info}
+The script runs within the following session:
+<<sessionInfo, echo=FALSE, results=tex>>=
+toLatex(sessionInfo())
+@
 
 \end{document}

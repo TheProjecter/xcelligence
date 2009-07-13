@@ -378,9 +378,10 @@ plateView <- function(rtca,ylim,...) {
   if(missing(ylim)) {
     ylim <- c(quantile(express,0.02), quantile(express,0.98))
   }
+  titles <- rownames(pData(rtca))
   for (i in 1:96) {
     plot(timepoints(rtca),express[,i], type="l", xlab="", ylab="", axes=FALSE,ylim=ylim,...)
-    title(paste(pData(rtca)$Well[i], pData(rtca)[,2][i]))
+    title(titles[i])
     abline(h=0, lty=2, col="darkgrey")
   }
   par(opar)
