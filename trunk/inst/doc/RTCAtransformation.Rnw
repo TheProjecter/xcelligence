@@ -1,0 +1,121 @@
+%\VignetteIndexEntry{RTCAtransformation: Discussion of transformation methods of RTCA data}
+%\VignetteDepends{}
+%\VignettePackage{}
+
+\documentclass[11pt]{article}
+
+\usepackage{mathptmx}	 
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{multirow}
+\usepackage{url}
+\renewcommand{\multirowsetup}{\centering}
+
+\usepackage{times}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage[pdftex]{graphicx}
+\SweaveOpts{keep.source=TRUE,eps=FALSE,pdf=TRUE,prefix=FALSE} 
+
+% R part
+\newcommand{\todo}[2]{\textit{\textbf{To do:} (#1) #2}}
+\newcommand{\fixme}[2]{\textit{\textbf{FIXME:} (#1) #2}}
+\newcommand{\R}[1]{{\textsf{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+\newcommand{\Metas}[1]{{\texttt{#1}}}
+\newcommand{\myincfig}[3]{%
+  \begin{figure}[htbp]
+    \begin{center}
+      \includegraphics[width=#2]{#1}
+      \caption{\label{#1}#3}
+    \end{center}
+  \end{figure}
+}
+
+% trademark, copyright and registered
+\def\TReg{\textsuperscript{\textregistered}}
+\def\TCop{\textsuperscript{\textcopyright}}
+\def\TTra{\textsuperscript{\texttrademark}}
+\def\xSys{xCELLigence\TTra System }
+
+\begin{document}
+\setkeys{Gin}{width=0.9\textwidth}
+\title{RTCAtransformation: Discussion of transformation methods of RTCA data}
+\author{Jitao David Zhang}
+\maketitle
+
+\begin{abstract}
+  
+\end{abstract}
+
+\section{Introduction}
+
+Loading packages.
+<<lib, echo=TRUE>>=
+library(xtable)
+library(RTCA)
+@ 
+
+\section{Methods}
+\subsection{Enumeration}
+\begin{itemize}
+  \item A
+  \item B
+\end{itemize}
+
+
+\subsection{Figure}
+\begin{figure}[!htbp]
+  \begin{center}
+<<subsetplot, echo=TRUE, fig=TRUE>>=
+plot(1:10)
+@ 
+\caption{Figure}\label{fig:01}
+\end{center}
+\end{figure}
+
+Or,
+
+\myincfig{subsetplot}{0.6\textwidth}{%
+  Alternative method to insert a plot with codes from an earlier chunk
+}
+
+\subsection{About table and longtable}
+Here is the way to how present a long table in Table \ref{tbl:longTable}.
+\begin{table}[!htb]
+  \centering\resizebox{.99\linewidth}{!}{%
+<<cohGO, echo=FALSE, results=tex, eval=TRUE>>=
+x <- data.frame(Name=c("Thomas Hitzlsperger","Piotr Trochowski","Philipp Lahm", "Lukas Podolski", "Marcell Jansen"),
+                Age=format(c(27, 25, 27, 24, 24),format="d"),
+                "Current Club"=c("VfB Stuttgart","Hamburger SV","Bayern Muenchen", "FC Koeln","Hamburger SV"),
+                "Birth Place"=c("Muenchen","Tczew","Muenchen","Gliwice","Moenchengladbach"),
+                "Last Club"=c("Aston Villa","Bayern Muenchen","VfB Stuttgart","FC Koeln", "Bayern Muenchen"),
+                check.names=FALSE)
+xx <- xtable(x)
+print(xx, floating=FALSE)
+@ 
+}\caption{Example of long table}\label{tbl:longTable}
+\end{table}
+
+\section{Example of weaver}
+We use \Rpackage{weaver} to cache computation intensive code chunks. For example
+<<weaveExample, echo=FALSE, cache=TRUE>>=
+N <- 2000
+x <- sapply(seq(N), function(x) mean(rnorm(N)))
+@ 
+
+Once the code is cached, we could use 
+<<weaverExecute, echo=TRUE, eval=FALSE>>=
+Sweave("your/file/name", driver=weaver())
+@ 
+\section{Session Info}
+The script runs within the following session:
+<<sessionInfo, echo=FALSE, results=tex>>=
+toLatex(sessionInfo())
+@
+
+\end{document}

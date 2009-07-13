@@ -52,7 +52,8 @@ stable-check:
 
 Sweave:
 	@echo '===== Sweaving Package ====='
-	@(cd inst/doc;${R} CMD Sweave *.Rnw;pdflatex *.tex; pdflatex *.tex;)
+	@(cd inst/doc;${R} CMD Sweave aboutRTCA.Rnw;pdflatex aboutRTCA.tex; pdflatex aboutRTCA.tex;)
+	@(cd inst/doc;${R} CMD Sweave RTCAtransformation.Rnw;pdflatex RTCAtransformation.tex; pdflatex RTCAtransformation.tex;)
 	@echo '===== Sweaving finished ====='
 	@echo ' '
 
