@@ -32,7 +32,7 @@
 \def\TReg{\textsuperscript{\textregistered}}
 \def\TCop{\textsuperscript{\textcopyright}}
 \def\TTra{\textsuperscript{\texttrademark}}
-\def\xSys{xCELLigence\TTra System}
+\def\xSys{xCELLigence\TTra System }
 
 \begin{document}
 \setkeys{Gin}{width=0.8\textwidth}
