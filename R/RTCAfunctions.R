@@ -321,9 +321,9 @@ plotGridEffect <- function(rtca, mode=c("column","row"), xlab="time point", ylab
   }
 }
 
-controlview <- function(rtca,
+controlView <- function(rtca,
                         genesymbol=c("Allstar","COPB2","GFP","mock", "PLK1","WEE1"),
-                        controlcols,
+                        cols,
                         ylim,smooth=FALSE, group=TRUE, ylab="Normalized cell index", xlab="Time interval (hour)",  drawsd=TRUE, normline=TRUE, ncol=1, legendpos="topleft",...) {
   timeint <- timepoints(rtca)
   frame <- exprs(rtca)
@@ -332,8 +332,8 @@ controlview <- function(rtca,
     ylim <- quantile(frame, c(0.05, 0.95))
   plot(timeint, frame[,1], type="n", ylim=ylim, xlab=xlab, ylab=ylab,...)
   genesymbols <- relevels(factor(genesymbol), genesymbol)
-  if(missing(controlcols))
-    controlcols <- brewer.pal(nlevels(genesymbols),"Set2")
+  if(missing(cols))
+    cols <- brewer.pal(nlevels(genesymbols),"Set2")
   for (i in 1:nlevels(genesymbols)) {
     gs <- levels(genesymbols)[i]
     gsindex <- grep(paste("^",gs,"$",sep=""),pdata$GeneSymbol)
@@ -342,22 +342,22 @@ controlview <- function(rtca,
       gscols <- gscols[,!apply(gscols, 2, function(x) all(is.na(x))), drop=FALSE]
       groupmean <- rowMeans(gscols)
       groupsd <- apply(gscols,1,sd,na.rm=T)/sqrt(length(gsindex))*1.96
-      lines(timeint, groupmean, col=controlcols[i], lwd=3)
+      lines(timeint, groupmean, col=cols[i], lwd=3)
       if(drawsd) {
-        segments(timeint, groupmean+groupsd, timeint, groupmean-groupsd, col=controlcols[i], lwd=1)
-        segments(timeint-0.25, groupmean-groupsd, timeint+0.25, groupmean-groupsd, col=controlcols[i])
-        segments(timeint-0.25, groupmean+groupsd, timeint+0.25, groupmean+groupsd, col=controlcols[i])
+        segments(timeint, groupmean+groupsd, timeint, groupmean-groupsd, col=cols[i], lwd=1)
+        segments(timeint-0.25, groupmean-groupsd, timeint+0.25, groupmean-groupsd, col=cols[i])
+        segments(timeint-0.25, groupmean+groupsd, timeint+0.25, groupmean+groupsd, col=cols[i])
       }
     } else {
       for (j in gsindex) {
         y <- frame[,j]
         if(smooth) y <- smooth(y)
-        lines(timeint, y, col=controlcols[i], lwd=3)
+        lines(timeint, y, col=cols[i], lwd=3)
       }
     }
   }
   grid()
-  legend(legendpos, legend=levels(genesymbols), col=controlcols, lwd=4, cex=1.1, bty="n", ncol=ncol)
+  legend(legendpos, legend=levels(genesymbols), col=cols, lwd=4, cex=1.1, bty="n", ncol=ncol)
 
 
   if(normline)
