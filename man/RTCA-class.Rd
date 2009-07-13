@@ -33,18 +33,27 @@
 \title{Class "RTCA"}
 \description{RTCA object}
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("RTCA", assayData, phenoData, featureData, experimentData, annotation, exprs, ...)}.
+Objects can be created by calls of the form \code{new("RTCA", assayData,
+  phenoData, featureData, experimentData, annotation, exprs,
+  ...)}. However, it is more common to be constructed by
+\code{\link{parseRTCA}} function by reading in RTCA output data directly.
 }
 \section{Slots}{
   \describe{
     \item{\code{expID}:}{Object of class \code{"character"}, experiment ID}
-    \item{\code{timeline}:}{Object of class \code{"RTCAtimeline"} ~~ }
-    \item{\code{assayData}:}{Object of class \code{"AssayData"} ~~ }
-    \item{\code{phenoData}:}{Object of class \code{"AnnotatedDataFrame"} ~~ }
-    \item{\code{featureData}:}{Object of class \code{"AnnotatedDataFrame"} ~~ }
-    \item{\code{experimentData}:}{Object of class \code{"MIAME"} ~~ }
-    \item{\code{annotation}:}{Object of class \code{"character"} ~~ }
-    \item{\code{.__classVersion__}:}{Object of class \code{"Versions"} ~~ }
+    \item{\code{timeline}:}{Object of class \code{"RTCAtimeline"},
+      recording action track along the time line}
+    \item{\code{assayData}:}{Object of class \code{"AssayData"}, assay
+      data inherited from \code{ExpressionSet-class}}
+    \item{\code{phenoData}:}{Object of class
+      \code{"AnnotatedDataFrame"}, pheno data of the assay, annotating
+      the wells}
+    \item{\code{featureData}:}{Object of class
+      \code{"AnnotatedDataFrame"}, feature data of the assay, preserved
+      for time-line recording by the package}
+    \item{\code{experimentData}:}{Object of class \code{"MIAME"}, idle}
+    \item{\code{annotation}:}{Object of class \code{"character"}, idle}
+    \item{\code{.__classVersion__}:}{Object of class \code{"Versions"},idle}
   }
 }
 \section{Extends}{
@@ -55,28 +64,30 @@ Class \code{\link[Biobase]{Versioned-class}}, by class "ExpressionSet", distance
 }
 \section{Methods}{
   \describe{
-    \item{addAction}{\code{signature(object = "RTCA", time = "numeric", action = "character")}: ... }
-    \item{derivativeTransform}{\code{signature(object = "RTCA")}: ... }
-    \item{getAction}{\code{signature(object = "RTCA", time = "numeric")}: ... }
-    \item{interpolationTransform}{\code{signature(object = "RTCA")}: ... }
-    \item{plotRTCA}{\code{signature(x = "RTCA")}: ... }
-    \item{ratioTransform}{\code{signature(object = "RTCA")}: ... }
-    \item{rgrTransform}{\code{signature(object = "RTCA")}: ... }
-    \item{rmAction}{\code{signature(object = "RTCA", time = "numeric")}: ... }
-    \item{RTCAtimeline}{\code{signature(object = "RTCA")}: ... }
-    \item{RTCAtimeline<-}{\code{signature(object = "RTCA")}: ... }
-    \item{show}{\code{signature(object = "RTCA")}: ... }
-    \item{smoothTransform}{\code{signature(object = "RTCA", method = "missing")}: ... }
-    \item{smoothTransform}{\code{signature(object = "RTCA", method =
-	"ANY")}: ...}
+    \item{addAction}{\code{signature(object = "RTCA", time = "numeric",
+	action = "character")}: add action at the specified time, passed
+    to the \code{RTCAtimeline} slot}
+    \item{getAction}{\code{signature(object = "RTCA", time =
+	"numeric")}: get action at the specified time, passed
+    to the \code{RTCAtimeline} slot}
+    \item{plotRTCA}{\code{signature(x = "RTCA")}: plot RTCA }
+    \item{rmAction}{\code{signature(object = "RTCA", time = "numeric")}:
+    remove action at the specified time, passed
+    to the \code{RTCAtimeline} slot}
+    \item{show}{\code{signature(object = "RTCA")}: print method }
     \item{expID}{code{signature(object = "RTCA")}: get Experiment ID}
-    \item{expID<-}{code{signature(object = "RTCA", value = "ANY")}: get Experiment ID}
-    \item{time}{\code{signature(x = "RTCA")}: ... }
-    \item{timeline}{\code{signature(object = "RTCA")}: ... }
-    \item{timeline<-}{\code{signature(object = "RTCA")}: ... }
-    \item{timepoints}{\code{signature(object = "RTCA")}: ... }
-    \item{timepoints<-}{\code{signature(object = "RTCA")}: ... }
-    \item{updateAction}{\code{signature(object = "RTCA", time = "numeric", action = "character")}: ... }
+    \item{expID<-}{code{signature(object = "RTCA", value = "ANY")}: set Experiment ID}
+    \item{time}{\code{signature(x = "RTCA")}: deprecated }
+    \item{timeline}{\code{signature(object = "RTCA")}: get the \code{RTCAtimeline} slot }
+    \item{timeline<-}{\code{signature(object = "RTCA")}: assign the
+      \code{RTCAtimeline} slot }
+    \item{timepoints}{\code{signature(object = "RTCA")}: get the
+      recording time points in a vector }
+    \item{timepoints<-}{\code{signature(object = "RTCA")}: assign the
+      recording time points }
+    \item{updateAction}{\code{signature(object = "RTCA", time =
+	"numeric", action = "character")}: update the action at the specified time, passed
+    to the \code{RTCAtimeline} slot }
   }
 }
 \references{
@@ -89,6 +100,6 @@ Class \code{\link[Biobase]{Versioned-class}}, by class "ExpressionSet", distance
 }
 \author{ Jitao David Zhang \email{j.zhang@dkfz.de} }
 \examples{
-new("RTCA")
+new("RTCA", expID="testExp01")
 }
 \keyword{classes}
