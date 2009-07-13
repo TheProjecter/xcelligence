@@ -11,3 +11,5 @@
 	describe the process of parsing.
 
 	* RTCA-class: Experiment ID added to RTCA class
+
+	* Makefile: add Makefile to simplify common tasks like check and install
