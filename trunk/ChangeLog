@@ -10,4 +10,4 @@
 	phenoData. Details section in the documentation is re-written to
 	describe the process of parsing.
 
-	
+	* RTCA-class: Experiment ID added to RTCA class

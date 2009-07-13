@@ -16,6 +16,10 @@
 \alias{smoothTransform,RTCA,missing-method}
 \alias{smoothTransform,RTCA,ANY-method}
 \alias{time,RTCA-method}
+\alias{expID}
+\alias{expID,RTCA-method}
+\alias{expID<-}
+\alias{expID<-,RTCA-method}
 \alias{timeline}
 \alias{timeline,RTCA-method}
 \alias{timeline<-}
@@ -32,7 +36,8 @@
 Objects can be created by calls of the form \code{new("RTCA", assayData, phenoData, featureData, experimentData, annotation, exprs, ...)}.
 }
 \section{Slots}{
-	 \describe{
+  \describe{
+    \item{\code{expID}:}{Object of class \code{"character"}, experiment ID}
     \item{\code{timeline}:}{Object of class \code{"RTCAtimeline"} ~~ }
     \item{\code{assayData}:}{Object of class \code{"AssayData"} ~~ }
     \item{\code{phenoData}:}{Object of class \code{"AnnotatedDataFrame"} ~~ }
@@ -62,14 +67,17 @@ Class \code{\link[Biobase]{Versioned-class}}, by class "ExpressionSet", distance
     \item{RTCAtimeline<-}{\code{signature(object = "RTCA")}: ... }
     \item{show}{\code{signature(object = "RTCA")}: ... }
     \item{smoothTransform}{\code{signature(object = "RTCA", method = "missing")}: ... }
-    \item{smoothTransform}{\code{signature(object = "RTCA", method = "ANY")}: ... }
+    \item{smoothTransform}{\code{signature(object = "RTCA", method =
+	"ANY")}: ...}
+    \item{expID}{code{signature(object = "RTCA")}: get Experiment ID}
+    \item{expID<-}{code{signature(object = "RTCA", value = "ANY")}: get Experiment ID}
     \item{time}{\code{signature(x = "RTCA")}: ... }
     \item{timeline}{\code{signature(object = "RTCA")}: ... }
     \item{timeline<-}{\code{signature(object = "RTCA")}: ... }
     \item{timepoints}{\code{signature(object = "RTCA")}: ... }
     \item{timepoints<-}{\code{signature(object = "RTCA")}: ... }
     \item{updateAction}{\code{signature(object = "RTCA", time = "numeric", action = "character")}: ... }
-	 }
+  }
 }
 \references{
   \describe{

@@ -12,7 +12,9 @@ setGeneric("orderAction", function(object) standardGeneric("orderAction"))
 setGeneric("updateAction", function(object, time, action,...) standardGeneric("updateAction"))
 setGeneric("reset", function(object) standardGeneric("reset"))
 
-## RTCAtimeline
+## RTCA
+setGeneric("expID", function(object) standardGeneric("expID"))
+setGeneric("expID<-", function(object,value) standardGeneric("expID<-"))
 setGeneric("timeline", function(object) standardGeneric("timeline"))
 setGeneric("timeline<-", function(object, value) standardGeneric("timeline<-"))
 

@@ -36,6 +36,14 @@ setReplaceMethod("timeline", "RTCA", function(object,value) {
   return(object)
 })
 
+setMethod("expID", "RTCA", function(object) {
+  object@expID
+})
+setReplaceMethod("expID", "RTCA", function(object, value) {
+  object@expID <- value
+  return(object)
+})
+
 ##--------------------##
 ## RTCAtimeline: actions
 ##--------------------##
@@ -150,6 +158,7 @@ setMethod("show","RTCAtimeline", function(object) {
 })
 
 setMethod("show", "RTCA", function(object) {
+  cat("Experiment ID:", expID(object), "\n")
   show(timeline(object))
   cat("\n")
   show(as(object, "ExpressionSet"))
