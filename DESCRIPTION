@@ -11,4 +11,4 @@ LazyLoad: yes
 Depends: methods,stats,graphics,Biobase,RColorBrewer
 Collate: AllClasses.R AllGenerics.R AllMethods.R RTCAfunctions.R
 URL: http://code.google.com/p/xcelligence/, http://www.xcelligence.roche.com/, http://www.nextbiomotif.com/Home/scientific-programming
-biocViews: CellBasedAssays, Infrastructure, Visualization, 
+biocViews: CellBasedAssays, Infrastructure, Visualization, TimeCourse
