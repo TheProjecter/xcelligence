@@ -152,7 +152,7 @@ nearestTimeIndex <- function(rtca, time) {
 }
 
 ## cut by time
-spliceRTCA <- function(x, start, end) {
+sliceRTCA <- function(x, start, end) {
   tst <- nearestTimeIndex(x, start)
   tend <- nearestTimeIndex(x, end)
   return(x[tst:tend,])
