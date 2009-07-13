@@ -12,6 +12,7 @@
 ##	- make stable-check	calls R CMD check (with RUnit)
 ##      - make dist     	calls R-devel CMD build
 ##      - make stable-dist     	calls R CMD build
+##	- make Sweave		calls R CMD Sweave
 ##			
 ##
 ##----------------------------------------------------------------------------##
@@ -47,7 +48,13 @@ stable-check:
 	@echo '====== Checking Package ======'
 	@(export R_DEVELOP_MODE=TRUE; cd ..; ${Rstable} CMD check $(PKG))
 	@echo '====== Checking finished ======'
-	@echo '
+	@echo ' '
+
+Sweave:
+	@echo '===== Sweaving Package ====='
+	@(cd inst/doc;${R} CMD Sweave *.Rnw;pdflatex *.tex; pdflatex *.tex;)
+	@echo '===== Sweaving finished ====='
+	@echo ' '
 
 dist:	
 	@echo '====== Building Distribution ======'
