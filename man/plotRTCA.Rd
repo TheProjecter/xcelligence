@@ -2,8 +2,6 @@
 \Rdversion{1.1}
 \alias{plotRTCA}
 \alias{controlview}
-\alias{plateView}
-\alias{plotGridEffect}
 \title{
   VISUALIZING RTCA RESULT
 }

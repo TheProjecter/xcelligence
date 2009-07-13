@@ -280,7 +280,7 @@ rgrTransform <- function(object, smooth=TRUE) {
 ## Visualization
 ##----------------------------------------##
 ## special function to determine grid effect
-.gridEffect <- function(rtca, mode=c("row","col")) {
+.gridEffect <- function(rtca, mode=c("row","column")) {
   mode <- match.arg(mode)
   frame <- exprs(rtca)
   pos <- alphaNames2Pos(colnames(frame))
@@ -298,7 +298,7 @@ rgrTransform <- function(object, smooth=TRUE) {
   return(list(mean=gridmean, sd=gridsd))
 }
 
-plotGridEffect <- function(rtca, mode=c("col","row"), xlab="time point", ylab="readout",legend=TRUE,...) {
+plotGridEffect <- function(rtca, mode=c("column","row"), xlab="time point", ylab="readout",legend=TRUE,...) {
   mode <- match.arg(mode)
   grid <- .gridEffect(rtca, mode)
   mean <- grid[["mean"]]
