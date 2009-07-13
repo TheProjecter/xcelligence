@@ -85,6 +85,10 @@ relevels <- function (x, refs)
 ##----------------------------------------##
 parseRTCA <- function(file,dec=".", phenoData, skipWell,...) {
   scans <- scan(file, what=character(0), sep="\n")
+  ## experimentID
+  expIdIndex <- grep("Experiment ID",scans)
+  expId <- gsub(".*ID:\\s*([[:alnum:]]*)[[:space:]]*", "\\1", scans[expIdIndex], extended=TRUE)
+  
   skipnum <- grep("^Time", scans)-1
   dt <- read.table(file, skip=skipnum, sep="\t",head=TRUE,dec=dec,...)
   dt <- dt[-1,] ## 0 is doubled
@@ -114,7 +118,7 @@ parseRTCA <- function(file,dec=".", phenoData, skipWell,...) {
       }
     }
 
-  x <- new("RTCA")
+  x <- new("RTCA", expID=expId)
   exprs(x) <- as.matrix(dt)
   timepoints(x) <- tintervals
   if(missing(phenoData)) {

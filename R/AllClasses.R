@@ -48,8 +48,8 @@ setClass("RTCAhistory",
          })
          
 setClass("RTCA",
-         representation(timeline="RTCAtimeline"),
-         prototype=list(timeline=new("RTCAtimeline")),
+         representation(expID="character",timeline="RTCAtimeline"),
+         prototype=list(expID=as.character(NA),timeline=new("RTCAtimeline")),
          contains="ExpressionSet")
 
 
