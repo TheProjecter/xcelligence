@@ -1,0 +1,13 @@
+2009-07-13 Jitao David Zhang <j.zhang@dkfz.de>
+
+	* combineRTCA(list): Additional column is renamed into Plate. The vlues
+	is evaluated from list item names. When the list has no name, an
+	integer index beginning from 1 is used. Special attentions to list
+	partially with names is noted in the documentation.
+
+	* parseRTCA(file, dec=".",phenoData, skipWell,...): Example is
+	added in the documentation how to import pre-configured
+	phenoData. Details section in the documentation is re-written to
+	describe the process of parsing.
+
+	

@@ -130,12 +130,18 @@ parseRTCA <- function(file,dec=".", phenoData, skipWell,...) {
 combineRTCA <- function(list) {
   exprss <- lapply(list, exprs)
   pdatas <- lapply(list, pData)
+  pnames <- names(list)
+  if(is.null(pnames)) {
+    pnames <- seq(along=list)
+  } 
+
   for(i in seq(along=pdatas)) {
-    pdatas[[i]]$plate <- i
+    pdatas[[i]]$Plate <- pnames[i]
   }
   
   newexprs <- do.call(cbind, exprss)
   newpdata <- do.call(rbind, pdatas)
+  newpdata$Plate <- factor(newpdata$Plate)
   
   newobj <- list[[1]]
   exprs(newobj) <- newexprs
