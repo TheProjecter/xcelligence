@@ -29,7 +29,8 @@
 \alias{startTime<-,RTCAtimeline,POSIXct-method}
 
 \title{Class "RTCAtimeline"}
-\description{Time line of actions performed by the xCelligence device}
+\description{Time line of actions performed by the xCelligence device,
+  supporting CRUD manipulations (create, read, update and delete).}
 \section{Objects from the Class}{
   Objects can be created by calls of the form
   \code{new("RTCAtimeline")}. However, it is more common to be called
@@ -54,11 +55,29 @@
 \section{Methods}{
   \describe{
     \item{addAction}{\code{signature(object = "RTCAtimeline", time =
-	"numeric", action = "character")}: ...}
-    \item{actionTrack}{\code{signature(object = "RTCAtimeline")}: ... }
+	"numeric", action = "character")}: add action at the specified time}
+    \item{actionTrack}{\code{signature(object = "RTCAtimeline")}: get
+      the action track in the form of \code{data.frame} }
     \item{actionTrack<-}{\code{signature(object = "RTCAtimeline", value
-	= "data.frame")}: ... }
-  }
+	= "data.frame")}: assign the action track }
+    \item{getAction}{\code{signature(object = "RTCAtimeline", time = "numeric")}: get
+      action at the specified time}
+    \item{orderAction}{\code{signature(object = "RTCAtimeline")}: order
+      the action track by the time}
+    \item{reset}{\code{signature(object = "RTCAtimeline")}: undo all
+      editing of the object and reset it to the initial state}
+     \item{rmAction}{\code{signature(object = "RTCAtimeline", time = "numeric")}: remove
+       the action at the specified time}
+     \item{timeUnit}{\code{signature(object = "RTCAtimeline")}: return the
+       time unit used by the actiont track}
+     \item{timeUnit<-}{\code{signature(object = "RTCAtimeline", value = "character")}: assign
+       the time unit used by the actiont track}
+     \item{start}{\code{signature(object = "RTCAtimeline")}: return
+       the starting POSIXct time of the experiment}
+     \item{timeUnit<-}{\code{signature(object = "RTCAtimeline", value =
+	 "character")}: assign
+       the starting POSIXct time of the experiment}
+   }
 }
 \references{
   \describe{
