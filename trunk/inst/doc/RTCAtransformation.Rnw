@@ -49,69 +49,66 @@
 \maketitle
 
 \begin{abstract}
-  
+  The \xSys provides a dimentionless parameter Cell Index (CI) to
+  reflect the biological status of the monitored cells. In this
+  vignette we discuss the concept of the cell index briefly, and
+  introduces several transformation approaches to allow statistical
+  inferences of the RTCA assays.
 \end{abstract}
 
 \section{Introduction}
 
-Loading packages.
+First we load packages:
 <<lib, echo=TRUE>>=
 library(xtable)
 library(RTCA)
 @ 
 
+And we load a dataset (with its annotation) provided with the package as example:
+<<dataset, echo=TRUE>>=
+ofile <-  system.file("extdata/testOutput.csv", package="RTCA")
+pfile <- system.file("extdata/testOutputPhenoData.csv", package="RTCA")
+pData <- read.csv(pfile, sep="\t", row.names="Well")
+metaData <- data.frame(labelDescription=c(
+                         "Rack number",
+                         "siRNA catalogue number",
+                         "siRNA gene symbol",
+                         "siRNA EntrezGene ID",
+                         "siRNA targeting accession"
+                         ))
+phData <- new("AnnotatedDataFrame", data=pData, varMetadata=metaData)
+x <- parseRTCA(ofile, phenoData=phData)
+@ 
+
+\todo{David}{Explain the transformations and discuss}
+
+\section{Manipulation}
+\subsection{Smooth Transformation}
+
+<<smoothTransform, echo=TRUE>>=
+xSmooth <- smoothTransform(x)
+@ 
+
+\subsection{Interpolation Transformation}
+
+<<interpolationTranform, echo=TRUE>>=
+xInter <- interpolationTransform(x)
+@ 
 \section{Methods}
-\subsection{Enumeration}
-\begin{itemize}
-  \item A
-  \item B
-\end{itemize}
-
-
-\subsection{Figure}
-\begin{figure}[!htbp]
-  \begin{center}
-<<subsetplot, echo=TRUE, fig=TRUE>>=
-plot(1:10)
-@ 
-\caption{Figure}\label{fig:01}
-\end{center}
-\end{figure}
-
-Or,
-
-\myincfig{subsetplot}{0.6\textwidth}{%
-  Alternative method to insert a plot with codes from an earlier chunk
-}
-
-\subsection{About table and longtable}
-Here is the way to how present a long table in Table \ref{tbl:longTable}.
-\begin{table}[!htb]
-  \centering\resizebox{.99\linewidth}{!}{%
-<<cohGO, echo=FALSE, results=tex, eval=TRUE>>=
-x <- data.frame(Name=c("Thomas Hitzlsperger","Piotr Trochowski","Philipp Lahm", "Lukas Podolski", "Marcell Jansen"),
-                Age=format(c(27, 25, 27, 24, 24),format="d"),
-                "Current Club"=c("VfB Stuttgart","Hamburger SV","Bayern Muenchen", "FC Koeln","Hamburger SV"),
-                "Birth Place"=c("Muenchen","Tczew","Muenchen","Gliwice","Moenchengladbach"),
-                "Last Club"=c("Aston Villa","Bayern Muenchen","VfB Stuttgart","FC Koeln", "Bayern Muenchen"),
-                check.names=FALSE)
-xx <- xtable(x)
-print(xx, floating=FALSE)
-@ 
-}\caption{Example of long table}\label{tbl:longTable}
-\end{table}
-
-\section{Example of weaver}
-We use \Rpackage{weaver} to cache computation intensive code chunks. For example
-<<weaveExample, echo=FALSE, cache=TRUE>>=
-N <- 2000
-x <- sapply(seq(N), function(x) mean(rnorm(N)))
+\subsection{Derivative Transformation}
+Or known as slope.
+<<derivTransform, echo=TRUE>>=
+xDeriv <- derivativeTransform(x)
 @ 
 
-Once the code is cached, we could use 
-<<weaverExecute, echo=TRUE, eval=FALSE>>=
-Sweave("your/file/name", driver=weaver())
+\subsection{Relative Growth Rate Transformation}
+<<rgrTransform, echo=TRUE>>=
+xRgr <- rgrTransform(x)
 @ 
+
+\section{Discussion}
+\todo{David}{To write discussion}
+
 \section{Session Info}
 The script runs within the following session:
 <<sessionInfo, echo=FALSE, results=tex>>=
