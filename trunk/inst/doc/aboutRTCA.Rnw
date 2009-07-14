@@ -42,7 +42,7 @@
 \maketitle
 
 \section{Introduction to the xCELLigence\TTra System}
-The xCELLigence\TTra System, which contains a series of \underline{R}eal--\underline{T}ime \underline{C}ell \underline{A}nalyzer (RTCA), is a labeling--free cell--based assay system integrating micro electronics and cell biology, suitable for uninterrupted monitoring of biolgical processes of living cells.
+The xCELLigence\TTra System, also known as RT-CES\TTra system, which contains a series of \underline{R}eal--\underline{T}ime \underline{C}ell \underline{A}nalyzer (RTCA), is a labeling--free cell--based assay system integrating micro electronics and cell biology, suitable for uninterrupted monitoring of biolgical processes of living cells.
 
 The system relies on a micro-electronic biosensor built into each each of the 6 standard 96-well \emph{E-plate\TTra} microtitle plates. The sensor measures the electrical impedance of the cell population in the well. Cells that have contact with the sensor change the electrical impedance between the microelectrodes. The impedance measurement provides quantitative read-time information about the status of the cells, including cell number, viability and morphology. 
 
