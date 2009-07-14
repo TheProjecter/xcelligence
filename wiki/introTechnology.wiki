@@ -1,0 +1,15 @@
+Brief introduction to the technology
+
+= Introduction =
+
+xCELLigence System(R), also known as _RT-CES(R)_ System allows label-free, cell-based assays by measuring electronic impedances of cells. The system can be applied for both high-throughput screening and molecular and cellular biology research. Based on measured impedance, Cell Index (CI), a dimensionless parameter is derived and reported to provide quantitative information about the biological status of the cells, including cell number, viability, morphological changes.
+
+
+= Details =
+
+Information to be updated.
+
+= Links =
+* [http://www.faqs.org/patents/app/20090098645 Patent: cell culture article and methods thereof]
+* [http://www.xcelligence.roche.com/ xCELLigence System product page hosted by Roche]
+* [http://www.aceabio.com/Products/index.htm RT-CES product page hosted by ACEA Biosciences Inc.]
