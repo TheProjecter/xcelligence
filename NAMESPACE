@@ -1,5 +1,49 @@
+## import
 import("Biobase")
 importFrom("stats","time")
 importFrom("graphics","plot")
 
-exportPattern("^[[:alpha:]]+")
+## exports
+### class
+exportClasses("RTCAtimeline", #"RTCAhistory",
+              "RTCA")
+### methods
+exportMethods("actionTrack",
+              "actionTrack<-",
+              "timeUnit",
+              "timeUnit<-",
+              "startTime",
+              "startTime<-",
+              "getAction",
+              "addAction",
+              "rmAction",
+              "orderAction",
+              "updateAction",
+              "reset",
+              "expID",
+              "expID<-",
+              "timeline",
+              "timeline<-",
+              "timepoints",
+              "timepoints<-",
+              "plot")
+### functions
+export("alphaNames",
+       "repairAlphaName",
+       "alphaNames2Pos",
+       "rowcol2pos",
+       "factor2numeric",
+       "relevels",
+       "parseRTCA",
+       "combineRTCA",
+       "nearestTimeIndex",
+       "sliceRTCA")
+export("ratioTransform",
+       "smoothTransform",
+       "interpolationTransform",
+       "derivativeTransform",
+       "rgrTransform")
+export("plotGridEffect",
+       "controlView",
+       "plateView")
+       

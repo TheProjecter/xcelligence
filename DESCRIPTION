@@ -1,8 +1,8 @@
 Package: RTCA
 Type: Package
 Title: Open-source toolkit to analyse data from xCELLigence System (RTCA) by Roche
-Version: 1.1.0
-Date: 2009-07-14
+Version: 1.1.1
+Date: 2009-07-30
 Author: Jitao David Zhang, with input from Ulrich Tschulena and Stefan Wiemann
 Maintainer: Jitao David Zhang <j.zhang@dkfz.de>
 Description: Import, analyze and visualize data harvested from Roche(R) Xcelligence RTCA systems. The package imports the rich information in real-time cell electrical impedance data into computational and statistical environment R/Bioconductor. As an alternative to commercial software provided by Roche, the RTCA package provides more transformation (normalization) strategies and various visualization tools.
