@@ -1,7 +1,26 @@
 ## import
-import("Biobase")
-importFrom("stats","time")
-importFrom("graphics","plot")
+importClassesFrom(Biobase, AnnotatedDataFrame, AssayData,
+                  ExpressionSet, MIAME, Versions)
+
+importClassesFrom(methods, character, data.frame, numeric, POSIXct)
+
+importMethodsFrom(Biobase, exprs, "exprs<-", featureData,
+                  "featureData<-", "featureNames<-", pData, "pData<-",
+                  "phenoData<-")
+
+importMethodsFrom(methods, show)
+
+importFrom(graphics, abline, grid, layout, legend, lines, matplot, par,
+           plot, segments, title)
+
+importFrom(methods, "@<-", as, is, new, validObject)
+
+importFrom(RColorBrewer, brewer.pal)
+
+importFrom(stats, approx, quantile, relevel, sd, smooth.spline, spline,
+           time)
+
+importFrom(utils, read.table)
 
 ## exports
 ### class

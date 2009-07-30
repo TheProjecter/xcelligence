@@ -1,0 +1,6 @@
+1. Add IC50 (EC50) calculation approaches
+2. Add kinetic parameters:
+  - Cell index slope calculation
+  - cell index doubling time calculation
+  - cell index curve reorganizing and reforming
+3. Add transformation
