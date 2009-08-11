@@ -1,5 +1,6 @@
 ## import
-importClassesFrom(Biobase, AnnotatedDataFrame, AssayData,
+importClassesFrom(Biobase, AnnotatedDataFrame, AssayData, eSet,
+                  Versioned, VersionedBiobase,
                   ExpressionSet, MIAME, Versions)
 
 importClassesFrom(methods, character, data.frame, numeric, POSIXct)
