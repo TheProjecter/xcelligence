@@ -22,6 +22,7 @@ importFrom(stats, approx, quantile, relevel, sd, smooth.spline, spline,
            time)
 
 importFrom(utils, read.table)
+importFrom(gtools, invalid)
 
 ## exports
 ### class

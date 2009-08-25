@@ -52,6 +52,10 @@ setClass("RTCA",
          prototype=list(expID=as.character(NA),timeline=new("RTCAtimeline")),
          contains="ExpressionSet")
 
+setClass("rtcaWatershed",
+         representation(peakCenter="numeric",
+                        peakInterval="numeric",
+                        peakAvgHeight="numeric"))
 
 ##----------------------------------------##
 ## obsolete definition of RTCA

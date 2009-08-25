@@ -199,3 +199,22 @@ setMethod("plot", c("RTCA"), function(x,y,...) {
 ##----------------------------------------##
 ## transformation
 ##----------------------------------------##
+
+##----------------------------------------##
+## watershed
+##----------------------------------------##
+setMethod("peakCenter","rtcaWatershed",function(object) object@peakCenter)
+setMethod("peakInterval","rtcaWatershed",function(object) object@peakInterval)
+setMethod("peakAvgHeight", "rtcaWatershed", function(object) object@peakAvgHeight)
+setReplaceMethod("peakCenter", "rtcaWatershed", function(object, value) {
+  object@peakCenter <- value
+  return(object)
+})
+setReplaceMethod("peakInterval", "rtcaWatershed", function(object, value) {
+  object@peakInterval <- value
+  return(object)
+})
+setReplaceMethod("peakAvgHeight", "rtcaWatershed", function(object, value) {
+  object@peakAvgHeight <- value
+  return(object)
+})
