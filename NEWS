@@ -1,0 +1,7 @@
+Release 1.1.3 (Aug. 25, 2009)
+Internal:
+  + 'interpolationTrasnform', which calls either 'spline' or 'approx' to interpolate RTCA results along the time, is added
+  + 'myheatmap.2' is added to visualize the RTCA time-course data with heatmap
+  + 'rtcaWatershed' class (with methods) and 'rtcawatershed' function is added. The algorithm detects peaks in the RTCA data
+File structure:
+  + 'algorithms.R' and 'visualization.R' are added to make 'RTCAfunctions.R' rather a collection of miscellaneous functions.

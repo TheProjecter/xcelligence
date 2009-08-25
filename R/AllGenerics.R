@@ -23,5 +23,13 @@ setGeneric("timeline<-", function(object, value) standardGeneric("timeline<-"))
 setGeneric("timepoints", function(object) standardGeneric("timepoints"))
 setGeneric("timepoints<-", function(object,value) standardGeneric("timepoints<-"))
 
-## plot
+## watershed
+setGeneric("peakCenter", function(object) standardGeneric("peakCenter"))
+setGeneric("peakCenter<-", function(object,value) standardGeneric("peakCenter<-"))
+setGeneric("peakInterval", function(object) standardGeneric("peakInterval"))
+setGeneric("peakInterval<-", function(object,value) standardGeneric("peakInterval<-"))
+setGeneric("peakAvgHeight", function(object) standardGeneric("peakAvgHeight"))
+setGeneric("peakAvgHeight<-", function(object,value) standardGeneric("peakAvgHeight<-"))
 
+## plot
+setGeneric("growthHeatmap", function(object,...) standardGeneric("growthHeatmap"))
