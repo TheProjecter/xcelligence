@@ -197,9 +197,7 @@ Besides the \Rfunction{plot} function we have seen before, \Rpackage{RTCA} provi
 \begin{figure}
 \begin{center}
 <<plateView, echo=TRUE, fig=TRUE>>=
-opar <- par()
 plateView(x, col="orange")
-par(opar)
 @ 
 \caption{Plate view of a 96--well \emph{E-plate} from a RTCA assay run.}\label{fig:plateView}
 \end{center}
