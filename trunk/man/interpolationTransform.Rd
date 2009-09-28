@@ -30,8 +30,8 @@ interpolationTransform(object, interval=0.01, method=c("linear","constant","fmm"
   points to estimate results of regular intervals.
 
   Two classes of interpolations are supported by now: linear (using
-  \code{\link[stats]{approx}}) and cubic spline
-  (\code{\link[stats]{spline}}) interpolation. By default linear
+  \code{\link{approx}}) and cubic spline
+  (\code{\link{spline}}) interpolation. By default linear
   interpolation is used.
 }
 \value{

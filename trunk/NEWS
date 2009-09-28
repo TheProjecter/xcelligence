@@ -1,3 +1,7 @@
+Release 1.1.6 (Sep. 28, 2009)
+Documentation:
+  + All 'Suspect-Links' removed, which refer to the documentation pages in other packages.
+
 Release 1.1.5 (Sep. 28, 2009)
 API:
   + Checked for the release in the new BioC life cycle

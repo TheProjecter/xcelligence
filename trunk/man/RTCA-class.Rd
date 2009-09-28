@@ -58,10 +58,10 @@ Objects can be created by calls of the form \code{new("RTCA", assayData,
   }
 }
 \section{Extends}{
-Class \code{\link[Biobase]{ExpressionSet-class}}, directly.
-Class \code{\link[Biobase]{eSet-class}}, by class "ExpressionSet", distance 2.
-Class \code{\link[Biobase]{VersionedBiobase-class}}, by class "ExpressionSet", distance 3.
-Class \code{\link[Biobase]{Versioned-class}}, by class "ExpressionSet", distance 4.
+Class \code{\link{ExpressionSet-class}}, directly.
+Class \code{\link{eSet-class}}, by class "ExpressionSet", distance 2.
+Class \code{\link{VersionedBiobase-class}}, by class "ExpressionSet", distance 3.
+Class \code{\link{Versioned-class}}, by class "ExpressionSet", distance 4.
 }
 \section{Methods}{
   \describe{

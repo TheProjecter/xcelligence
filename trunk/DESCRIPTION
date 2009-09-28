@@ -1,7 +1,7 @@
 Package: RTCA
 Type: Package
 Title: Open-source toolkit to analyse data from xCELLigence System (RTCA) by Roche
-Version: 1.1.5
+Version: 1.1.6
 Date: 2009-09-28
 Author: Jitao David Zhang, with input from Ulrich Tschulena and Stefan Wiemann
 Maintainer: Jitao David Zhang <j.zhang@dkfz.de>
