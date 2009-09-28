@@ -1,3 +1,9 @@
+Release 1.1.5 (Sep. 28, 2009)
+API:
+  + Checked for the release in the new BioC life cycle
+Documentation:
+  + Vignette have been filled with transformation algorithms, However the statistical procedures still need to be described.
+
 Release 1.1.3 (Aug. 25, 2009)
 Internal:
   + 'interpolationTrasnform', which calls either 'spline' or 'approx' to interpolate RTCA results along the time, is added
