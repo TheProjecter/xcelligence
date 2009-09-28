@@ -72,7 +72,7 @@ interpolationTransform <- function(object, interval=0.01, method=c("linear","con
 ###--------------------###
 ### derivativeTransform
 ###--------------------###
-## derivative transform
+## derivative transform to get 'growth rate'
 
 .Deriv1 <- function(x,y) {
   y.prime <- diff(y) / diff(x)
