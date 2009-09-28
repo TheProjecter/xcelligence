@@ -58,7 +58,10 @@
 
 \section{Introduction}
 
-First we load packages:
+To demonstrate different types of transformation algorithms
+implemented in the \Rpackage{RTCA} package, we first load required
+Bioconductor packages.
+
 <<lib, echo=TRUE>>=
 library(xtable)
 library(RTCA)
@@ -80,10 +83,25 @@ phData <- new("AnnotatedDataFrame", data=pData, varMetadata=metaData)
 x <- parseRTCA(ofile, phenoData=phData)
 @ 
 
-\todo{David}{Explain the transformations and discuss}
+<<dims, echo=FALSE, results=hide>>=
+xTimePointNo <- dim(x)[[1]]
+xSampleNo <- dim(x)[[2]]
+@ 
+
+The object \Robject{x} is an instance of the \Rclass{RTCA} class,
+which extends the \Rclass{ExpressionSet} class structure in the
+\Rpackage{Biobase} package. It contains the raw data of
+\Sexpr{xSampleNo} samples in \Sexpr{xTimePointNo} time points.
 
 \section{Manipulation}
 \subsection{Smooth Transformation}
+\emph{Smooth Transformation} smoothes the RTCA curves by fitting a
+cubic smoothing spline. It provides more 'flat' data compared to the
+raw values due to the smoothing. While it is useful for
+visualization, the smooth transformation must be used with care when modelling or statistical
+procedures are performed later.
+
+The transformation is performed with the following syntax:
 
 <<smoothTransform, echo=TRUE>>=
 xSmooth <- smoothTransform(x)
@@ -91,23 +109,50 @@ xSmooth <- smoothTransform(x)
 
 \subsection{Interpolation Transformation}
 
+The \emph{RTCA} device can record the cell index at irregular time
+intervals. For example, two sampling time points per hour at the first
+48 hour and one time point per hour at the later 48 hour. Some
+algorithms and time-series model, however, requires data points
+distributed with regular time intervals. The \emph{interpolation
+  transformation}, as its name suggests, interpolates the RTCA-readout
+to regular intervals specified by the user. Several methods could be
+chosen for the interpolation, with the linear interpolation as the
+default method.
+
+Similarly as the smooth transformation, the interpolation can be
+called as easily as the following example shows:
 <<interpolationTranform, echo=TRUE>>=
 xInter <- interpolationTransform(x)
 @ 
+
 \section{Methods}
+
 \subsection{Derivative Transformation}
-Or known as slope.
+The \emph{derivative transformation} calculates the growth rate of the
+RTCA-readouts by its first derivative against time. As an alternative
+to the ratio normalization proposed by the device provider, the
+derivative transformation is independent of the choice of the
+normalising time point, which has to be given manually by the user and
+thereby introduces subjectivity in the analysis. 
+
+An example of the derivative transformation:
 <<derivTransform, echo=TRUE>>=
 xDeriv <- derivativeTransform(x)
 @ 
 
 \subsection{Relative Growth Rate Transformation}
+The \emph{relative growth rate transformation} is a derivative from
+the simple \emph{derivative transformation} by dividing the first
+derivative with the raw value at that time point. It is analogue to
+the \emph{relative growth rate} known in the population genetics where
+the mathematic model asummes that the growth rate is proportional to
+the population size.
+
+This feature is by now experimental and we refer interested users to
+the manual page of the funtion:
 <<rgrTransform, echo=TRUE>>=
 xRgr <- rgrTransform(x)
 @ 
-
-\section{Discussion}
-\todo{David}{To write discussion}
 
 \section{Session Info}
 The script runs within the following session:
